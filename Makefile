@@ -67,7 +67,7 @@ GLUT      := freeglut
 VPATH=gl
 
 LIBRARIES := ${OGLLIBDIR} ${X11LIBDIR} -L/usr/local/lib
-MODULES    = GLUT_fonts.o OpenGL_gl.o OpenGL_${GLUT}.o OpenGL_glu.o perlin.o 
+MODULES    = GLUT_fonts.o OpenGL_gl.o OpenGL_${GLUT}.o OpenGL_glu.o perlin.o quads.o worlds.o
 
 all: fortranBird
 
