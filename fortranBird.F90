@@ -112,7 +112,7 @@ Module gl_f90_mod
         Call glViewport(0_GLint,0_GLint,wW,wH)
         Call glMatrixMode(GL_PROJECTION)
         Call glLoadIdentity()
-        !Call gluOrtho2D(0.0_gldouble,wW+0.0_gldouble,0.0_gldouble,wH+0.0_gldouble)
+        Call glOrtho(0.0_gldouble,wW+0.0_gldouble,0.0_gldouble,wH+0.0_gldouble, 0.0_gldouble, 1.0_gldouble)
         Call glClearColor(1.0,1.0,1.0,1.0)
         Call glClear(GL_COLOR_BUFFER_BIT)
         Call glColor3f(1.0,0.0,0.0)
