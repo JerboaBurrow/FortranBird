@@ -1,6 +1,7 @@
 Module gl_f90_mod
 
-    ! NB this version of GL has no shaders, I think...
+    ! NB this version of GL has no shaders, I think... it some bizzare subset of ~2003 era GL.
+    !   we are making a game in Fortran, all bets are off
     Use opengl_gl
     Use opengl_glu
     Use opengl_glut
