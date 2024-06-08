@@ -22,3 +22,8 @@ ___
 
 ```make clean && COMPILER=x86_64-w64-mingw32-gfortran-posix make```
 
+___
+
+### Thanks
+
+- Anthony Stone and Aleksandar Donev for f03gl https://www-stone.ch.cam.ac.uk/pub/f03gl/index.xhtml
