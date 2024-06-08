@@ -30,7 +30,7 @@ BITS      := 64
 X11LIBDIR := -L/usr/lib/x86_64-linux-gnu
 
 #  Libraries for OpenGL, including GLUT, GLU and OpenGL
-F90GLUTLIB := -lglut -lGL -lGLU
+F90GLUTLIB := -lfreeglut -lGL -lGLU
 
 # The X11 libraries
 X11LIB     := -lX11 -lm
@@ -39,24 +39,11 @@ ifndef COMPILER
   COMPILER := gfortran
 endif
 FC=${COMPILER}
-ifeq (${COMPILER},nagfor)
-#  Nag nagfor compiler
-  FFLAGS    := $(DEBUG) -f2003 -colour -gline -DNAGF03 -DF2003 -DOPENGL
-  LIBRARIES := ${OGLLIBDIR} ${X11LIBDIR} # -L/usr/local/lib${BITS}
-  LIBS      := ${F90GLUTLIB} ${X11LIB} -lpthread -ldl
-endif
-ifeq (${COMPILER},gfortran)
 #  Gfortran
-  FFLAGS    := $(DEBUG) -fno-range-check -DOPENGL
-  LIBRARIES := ${OGLLIBDIR} ${X11LIBDIR}
-  LIBS      := ${F90GLUTLIB} ${X11LIB} -lpthread -ldl -lgfortran
-endif
-ifeq (${COMPILER},ifort)
-#  ifort compiler, version 11.1.059 or later.
-  FFLAGS    := $(DEBUG) -DOPENGL
-  LIBRARIES := ${OGLLIBDIR} ${X11LIBDIR} # -L/usr/local/lib${BITS}
-  LIBS      := ${F90GLUTLIB} ${X11LIB} -lpthread -ldl
-endif
+FFLAGS    := $(DEBUG) -fno-range-check -DOPENGL
+LIBRARIES := ${OGLLIBDIR} ${X11LIBDIR}
+LIBS      := ${F90GLUTLIB} ${X11LIB} -lpthread -ldl -lgfortran
+
 
 #  Choose the appropriate definition of the GLUT variable to choose
 #  GLUT, OpenGLUT or FreeGlut. It may be necessary to adjust the libraries.
@@ -67,7 +54,7 @@ GLUT      := freeglut
 VPATH=gl
 
 LIBRARIES := ${OGLLIBDIR} ${X11LIBDIR} -L/usr/local/lib
-MODULES    = GLUT_fonts.o OpenGL_gl.o OpenGL_${GLUT}.o OpenGL_glu.o perlin.o quads.o worlds.o
+MODULES    = OpenGL_gl.o OpenGL_${GLUT}.o OpenGL_glu.o perlin.o quads.o worlds.o
 
 all: fortranBird
 
