@@ -69,7 +69,6 @@ OpenGL_${GLUT}.o: OpenGL_gl.o
 fortranBird : %: %.F90 ${MODULES} force
 	${FC} ${FFLAGS} -O3 -c $<
 	${FC} $@.o ${MODULES} ${LIBRARIES} ${LIBS} -o $@
-	./$@
 
 OpenGL%.mod: OpenGL%.F90
 	${FC} ${FFLAGS} -O3 -c $<
