@@ -47,7 +47,7 @@ Module gl_f90_mod
             Cycle
         End If
         i = i+1
-        !Call glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, p)
+        Call glutStrokeCharacter(GLUT_STROKE_MONO_ROMAN, p)
       End Do
   
     End Subroutine draw_text
