@@ -6,8 +6,9 @@ Module gl_f90_mod
     Use opengl_glu
     Use opengl_glut
 
-    Use Quads
+    Use Quads, Only: Quad
     Use Worlds
+    Use Players, Only: Player
 
     ! Google it, it's a lovely feature of Fortran...
     Implicit None
@@ -24,7 +25,7 @@ Module gl_f90_mod
     Real                      :: tic, toc
     Real                      :: gy = 1.0, difficulty = 1.0
 
-    Type(Quad)                :: player
+    Type(Player)              :: bird
     Type(World)               :: w
     
     Contains
@@ -68,7 +69,7 @@ Module gl_f90_mod
 
     Subroutine end_game()
       Call w%draw()
-      Call player%draw()
+      Call bird%draw()
       Call draw_text("Game over!", wW*0.5, wH*0.5, 1.0)
     End Subroutine end_game
 
@@ -98,12 +99,12 @@ Module gl_f90_mod
         Call move(v)
       End If
 
-      Call player%set_position((/px, py/))
+      Call bird%set_position((/px, py/))
       Call w%update((/wvx*difficulty, wvy/))
 
       Call w%draw()
-      Call player%draw()
-      game_over = w%collided(player)
+      Call bird%draw()
+      game_over = w%collided(bird%get_bb())
 
     End Subroutine update
     
@@ -184,7 +185,7 @@ Module gl_f90_mod
         type = GLUT_RGB
         type = ior(type,GLUT_SINGLE)
         Call glutInitDisplayMode(type)
-        window = glutCreateWindow("GL and Fortran!")
+        window = glutCreateWindow("Fortran Bird!")
         Call glutDisplayFunc(display)
         Call glutKeyboardFunc(keyDown)
         Call glutKeyboardUpFunc(keyUp)
@@ -200,7 +201,7 @@ Program main
     Use opengl_glut
     Use gl_f90_mod
 
-    Call player%init((/px, py/), (/pw, ph/), 0.0, (/1.0,0.0,0.0,1.0/))
+    Call bird%init((/px, py/), (/pw, ph/), 0.0)
     Call w%generate(0.0, pw*2, Real(wH), pw, pw*3, 0.1*Real(wH), 0.75*Real(wH))
 
     Call init()
