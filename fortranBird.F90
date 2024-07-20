@@ -70,7 +70,8 @@ Module gl_f90_mod
     Subroutine end_game()
       Call w%draw()
       Call bird%draw()
-      Call draw_text("Game over!", wW*0.5, wH*0.5, 1.0)
+      Call draw_text("Game", wW*0.25, wH*0.5, 0.5)
+      Call draw_text("over!", wW*0.25, wH*0.25, 0.5)
     End Subroutine end_game
 
     Subroutine update()
@@ -178,7 +179,14 @@ Module gl_f90_mod
     End Subroutine
     
     Subroutine init()
-        Integer(GLenum) type
+        Integer(GLenum)      :: type
+        Real                 :: t
+        Integer, Allocatable :: seed(:)
+        Integer              :: n
+
+        Call random_seed(size=n)
+        Allocate(seed(n))
+        Call random_seed(get=seed)
 
         Call glutInitWindowSize(wW,wH)
         Call glutInit()

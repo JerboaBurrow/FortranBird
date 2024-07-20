@@ -20,6 +20,10 @@ Module worlds
 
     Contains
 
+        Real Function random()
+            Call random_number(random)
+        End Function random
+
         Subroutine draw_world(w)
             Class(World), Intent(InOut) :: w
 
@@ -40,11 +44,11 @@ Module worlds
 
             c = neighbour%get_c()
 
-            c(1) = c(1) + space + Rand()*space + neighbour%get_w()
-            c(2) = Rand()*height
+            c(1) = c(1) + space + random()*space + neighbour%get_w()
+            c(2) = random()*height
 
-            wh(1) = Rand()*(max_width-min_width)+min_width
-            wh(2) = Rand()*(max_height-min_height)+min_height
+            wh(1) = random()*(max_width-min_width)+min_width
+            wh(2) = random()*(max_height-min_height)+min_height
 
             Call generate_obstacle%init(&
               (/c(1), c(2)/),&
@@ -72,10 +76,10 @@ Module worlds
             w%max_height = max_height
 
             c(1) = c(1) + startx
-            c(2) = Rand()*w%height
+            c(2) = random()*w%height
 
-            wh(1) = Rand()*(w%max_width-w%min_width)+w%min_width
-            wh(2) = Rand()*(w%max_height-w%min_height)+w%min_height
+            wh(1) = random()*(w%max_width-w%min_width)+w%min_width
+            wh(2) = random()*(w%max_height-w%min_height)+w%min_height
 
             Call w%obstacles(1)%init(&
               (/c(1), c(2)/),&
