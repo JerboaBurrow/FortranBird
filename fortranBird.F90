@@ -15,7 +15,7 @@ Module gl_f90_mod
     
     Integer(GLint), Parameter :: wW = 512, wH = 512
     Integer(glcint)           :: window
-    Integer                   :: frame = 0
+    Integer                   :: frame = 0, score = 0
     Logical                   :: w_down = .false., a_down = .false.,&
                                  s_down = .false., d_down = .false.,&
                                  game_over = .false.
@@ -37,6 +37,7 @@ Module gl_f90_mod
 
       Integer :: i, p
 
+      call glscalef(scale, scale, scale)
       Call glColor4f(0.0,0.0,0.0,0.0)
       Call glTranslatef(x, y, 0.0_glfloat)
       i=1
@@ -68,10 +69,11 @@ Module gl_f90_mod
     End Subroutine move
 
     Subroutine end_game()
+      Character(Len=16) :: s
+      Write (s, '(a, i0)') "Game over!", score
       Call w%draw()
       Call bird%draw()
-      Call draw_text("Game", wW*0.25, wH*0.5, 0.5)
-      Call draw_text("over!", wW*0.25, wH*0.25, 0.5)
+      Call draw_text(s, 0.0, wH*0.5, 0.25)
     End Subroutine end_game
 
     Subroutine update()
@@ -123,6 +125,7 @@ Module gl_f90_mod
           Call end_game()
         Else
           Call update()
+          If (frame == 59) score = score + 1
         End If
 
         Call glFlush()
