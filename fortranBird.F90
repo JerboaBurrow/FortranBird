@@ -126,6 +126,7 @@ Module gl_f90_mod
         Else
           Call update()
           If (frame == 59) score = score + 1
+          difficulty = difficulty + 0.001
         End If
 
         Call glFlush()
