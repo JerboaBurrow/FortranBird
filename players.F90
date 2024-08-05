@@ -73,7 +73,8 @@ Module Players
             Real,          Intent(In   ) :: theta
 
             q%theta = theta
-
+            Call q%bb%set_rotation(theta)
+            Call q%body%set_rotation(theta)
 
         End Subroutine set_rotation
 
