@@ -1,3 +1,8 @@
+## It's a game, in Fortran 90!
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/67e68de4-2c4a-4ef6-bcaa-f62ade349b1d" />
+</p>
+
 # Linux building
 
 Build with ```make```
